@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Exceptions;
+namespace SSS\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+
+// I philip james ajagabos added this
+use Illuminate\Auth\AuthenticationException;
+//end here
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +17,9 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        // I Philip James Ajagabos added this
+
+       //end here
     ];
 
     /**
@@ -48,4 +54,47 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+    // I Philip James Ajagabos added this
+    /**
+     * Convert an authentication exception into an unaunthenticated reponse
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        # code...
+        // if($request->exceptionsJson()){
+        //     return response()->json(['error'=>'Unauthenticated'],401);
+        // }
+        $page;
+        $guard = array_get($exception->guards(),0);
+        switch ($guard) {
+            case 'administrator':
+                # code...
+                $page='admin.login';
+                break;
+            case 'guardian':
+                # code...
+                $page='guardian.login';
+                break;
+            case 'security':
+                # code...
+                $page='security.login';
+                break;
+            case 'staff':
+                # code...
+                $page='staff.login';
+                break;
+            default:
+                # code...
+                $page='login'; 
+                break;
+        }
+      return redirect()->guest(route($page));
+    }
+
+       //end here
 }

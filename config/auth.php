@@ -45,6 +45,38 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'administrator' => [
+            'driver' => 'session',
+            'provider' => 'administrators',
+        ],
+        'administrator_api' => [
+            'driver' => 'token',
+            'provider' => 'administrators',
+        ],
+        'guardian' => [
+            'driver' => 'session',
+            'provider' => 'guardians',
+        ],
+        'guardian_api' => [
+            'driver' => 'token',
+            'provider' => 'guardians',
+        ],
+        'security' => [
+            'driver' => 'session',
+            'provider' => 'securities',
+        ],
+        'security_api' => [
+            'driver' => 'token',
+            'provider' => 'securities',
+        ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staffs',
+        ],
+        'staff_api' => [
+            'driver' => 'token',
+            'provider' => 'staffs',
+        ],
     ],
 
     /*
@@ -67,7 +99,23 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => SSS\User::class,
+        ],
+        'administrators' => [
+            'driver' => 'eloquent',
+            'model' => SSS\Administrator::class,
+        ],
+        'guardians' => [
+            'driver' => 'eloquent',
+            'model' => SSS\Guardian::class,
+        ],
+        'securities' => [
+            'driver' => 'eloquent',
+            'model' => SSS\Security::class,
+        ],
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => SSS\Staff::class,
         ],
 
         // 'users' => [
@@ -94,6 +142,26 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'administrators' => [
+            'provider' => 'administrators',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'guardians' => [
+            'provider' => 'guardians',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'securities' => [
+            'provider' => 'secuguidancesrities',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'staffs' => [
+            'provider' => 'staffs',
             'table' => 'password_resets',
             'expire' => 60,
         ],

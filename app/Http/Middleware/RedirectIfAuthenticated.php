@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace SSS\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +18,22 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            
+            // I philip James Ajagabos added this
+            // from down below
+            switch ($guard) {
+                case 'administrator':
+                    # code...
+                    return redirect()->route('admin');
+                    break;
+                
+                default:
+                    # code...
+                    return redirect()-route('/home');
+                    break;
+            }
+            //end here
+            
             return redirect('/home');
         }
 
