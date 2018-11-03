@@ -5,6 +5,7 @@ namespace SSS\Http\Controllers;
 use SSS\Country;
 use Illuminate\Http\Request;
 
+
 class CountriesController extends Controller
 {
     /**
@@ -16,7 +17,10 @@ class CountriesController extends Controller
     public function index()
     {
         //
-        $countries = Country::simplePaginate(3);
+        $countries = Country::all();
+        return $countries;
+        // $countries = Country::paginate(5);
+        // return response()->json([$countries]);
         return view('countries.index',['countries'=>$countries]);
     }
 

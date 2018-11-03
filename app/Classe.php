@@ -12,15 +12,15 @@ class Classe extends Model
         'name',
     ];
     public function school_types(){
-        return $this->belongsTo('app\School_type');
+        return $this->belongsTo('SSS\School_type');
     }
     public function administrators(){
-        return $this->hasMany('app\Administrator');
+        return $this->hasMany('SSS\Administrator');
     }
     public function students(){
-        return $this->hasMany('app\Student');
+        return $this->hasMany('SSS\Student');
     }
     public function staffs(){
-        return $this->hasMany('app\Staff');
+        return $this->hasMany('SSS\Staff');
     }
 }

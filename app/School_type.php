@@ -11,6 +11,9 @@ class School_type extends Model
         'name',
     ];
     public function classes(){
-        return $this->hasMany('app\Classe');
+        return $this->hasMany('SSS\Classe');
+    }
+    public function schools(){
+        return $this->hasMany('SSS\School');
     }
 }

@@ -13,7 +13,7 @@ class GuardiansController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-        $this->middleware('auth:guardian');
+        // $this->middleware('auth:guardian');
     }
     public function index()
     {
@@ -62,7 +62,7 @@ class GuardiansController extends Controller
      * @param  \SSS\Guardian  $guardian
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guardian $guardian, $id)
+    public function edit(Guardian $guardian, $id=null)
     {
         //
         $guardian = Guardian::find($id);
@@ -79,6 +79,7 @@ class GuardiansController extends Controller
     public function update(Request $request, Guardian $guardian)
     {
         //
+        return redirect()->route('guardian')->with('success','profile updated succesfully');
     }
 
     /**

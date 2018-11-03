@@ -20,7 +20,7 @@ class CreateGuardiansTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone_number');
-            $table->string('email')->nullable();
+            $table->string('email')->unique();
             $table->integer('staff_id')->nullable()->unsigned();
             $table->string('password');
             $table->rememberToken();

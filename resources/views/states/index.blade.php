@@ -5,7 +5,7 @@
   <div class="panel-body">
     <ul class="list-group">
       @foreach($states as $state) 
-       <li class="list-group-item"><a href="/states/{{$state->id}}">{{$state->name}}</a></li>
+       <li class="list-group-item"><a href="states/{{$state->id}}">{{$state->name}}</a></li>
       @endforeach
     </ul>
   </div>

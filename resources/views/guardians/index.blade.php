@@ -1,7 +1,7 @@
 @extends('layouts.sss')
-@include('layouts.sideBar')
+ @include('layouts.topBar.guardian')
     @section('content')
-        <div class="panel panel-success">
+        <div class="panel panel-info">
         <div class="panel panel-heading">
                <strong> {{__('Guardian Dashboard')}}</strong>
             </div>
@@ -13,6 +13,7 @@
                 @endif
 
                 {{__('You are logged in!')}}
+                
             </div>
         </div>
     @endsection

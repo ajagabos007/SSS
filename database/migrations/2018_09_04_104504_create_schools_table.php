@@ -20,12 +20,14 @@ class CreateSchoolsTable extends Migration
             $table->string('address');
             $table->integer('country_id')->unsigned();
             $table->integer('state_id')->unsigned();
+            $table->integer('lga_id')->unsigned()->nullable();
             $table->integer('administrator_id')->unsigned();
             $table->timestamps();
             
             $table->foreign('school_type_id')->references('id')->on('school_types');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('state_id')->references('id')->on('states');
+            $table->foreign('lga_id')->references('id')->on('lgas');
             $table->foreign('administrator_id')->references('id')->on('administrators');
         });
     }

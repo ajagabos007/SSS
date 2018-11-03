@@ -21,10 +21,10 @@
             {{( $countries->links())}}
   
           </ul>
-
         </div>
       </div>
     </div>
   </div>
 </div>
+
 @endsection

@@ -1,21 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.sss')
+@include('layouts.topBar.admin') 
+@include('layouts.sideBar.general')
+@include('layouts.sideBar.admin')
+    @section('content')
+        <div class="panel panel-info">
+        <div class="panel panel-heading">
+               <strong> {{__('Admin Dashboard')}}</strong>
+            </div>
+            <div class="panel panel-body">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Admin Dashboard</div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    You are logged in!
-                </div>
+                    </div>
+                @endif
+                 
+                {{__('You are logged in!')}}
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    @endsection
+  
+    

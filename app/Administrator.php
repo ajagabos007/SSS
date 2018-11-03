@@ -18,6 +18,7 @@ class Administrator extends Authenticatable
 
     protected $fillable = [
         'tag_id',
+        'title_id',
         'surname',
         'first_name',
         'last_name',
@@ -30,6 +31,7 @@ class Administrator extends Authenticatable
         'lga_id',
         'religion_id',
         'address',
+        'phone_number',
         'next_of_kin_title_id',
         'next_of_kin_name',
         'next_of_kin_address',
@@ -44,26 +46,32 @@ class Administrator extends Authenticatable
         'remember_token',
     ];
  
+    public function title(){
+        return $this->belongsTo('SSS\Title');
+    }
     public function gender(){
-        return $this->belongsTo('app\Gender');
+        return $this->belongsTo('SSS\Gender');
     }
     public function staff_role(){
-        return $this->belongsTo('app\Staff_role');
+        return $this->belongsTo('SSS\Staff_role');
     }
     public function classe(){
-        return $this->belongsTo('app\Classe');
+        return $this->belongsTo('SSS\Classe');
     }
     public function country(){
-        return $this->belongsTo('app\Country');
+        return $this->belongsTo('SSS\Country');
     }
     public function state(){
-        return $this->belongsTo('app\State');
+        return $this->belongsTo('SSS\State');
     }
     public function lga(){
-        return $this->belongsTo('app\Lga');
+        return $this->belongsTo('SSS\Lga');
     }
     public function religion(){
-        return $this->belongsTo('app\Religion');
+        return $this->belongsTo('SSS\Religion');
+    }
+    public function schools(){
+        return $this->hasMany('SSS\School');
     }
   
 }

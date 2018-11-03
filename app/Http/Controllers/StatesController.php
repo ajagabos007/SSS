@@ -16,8 +16,17 @@ class StatesController extends Controller
     public function index()
     {
         //
-        $states = State::all();
-        return view('states.index',['states'=>$states]);
+        $country_id=null;
+        if($country_id!=null){
+            $country = Country::find($country_id);
+            $states = $country->states;
+            return $states;
+        }
+        else{
+            $states = State::all();
+            return view('states.index',['states'=>$states]);
+        }
+       
     }
 
     /**
@@ -63,7 +72,6 @@ class StatesController extends Controller
     {
         //
         $state = State::find($state->id);
-
         return view('states.show',['state'=>$state]);
     }
 

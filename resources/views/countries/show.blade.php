@@ -6,7 +6,6 @@
 
     <ul class="list-group">
         @foreach($country->states as $state)
-
         <li class="list item-group">{{$loop->index+1}} {{$state->name}}<a href="/states/{{$state->id}} ">Edit</a></li>
         @endforeach
     </ul>

@@ -20,6 +20,9 @@ class Lga extends Model
     public function administrators(){
         return $this->hasMany('app\Administrator');
     }
+    public function schools(){
+        return $this->hasMany('app\School');
+    }
     public function students(){
         return $this->hasMany('app\Student');
     }

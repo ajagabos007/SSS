@@ -13,27 +13,31 @@ class School extends Model
         'address',
         'country_id',
         'state_id',
+        'lga_id',
         'administrator_id',
     ];
     public function school_type(){
-        return $this->belongsTo('app/School_type');
+        return $this->belongsTo('SSS/School_type');
     }
     public function country(){
-        return $this->belongsTo('app/Country');
+        return $this->belongsTo('SSS/Country');
     }
     public function state(){
-        return $this->belongsTo('app/State');
+        return $this->belongsTo('SSS/State');
+    }
+    public function lga(){
+        return $this->belongsTo('SSS/lga');
     }
     public function administrator(){
-        return $this->belongsTo('app/Administrator');
+        return $this->belongsTo('SSS/Administrator');
     }
     public function students(){
-        return $this->hasMany('app/Student');
+        return $this->hasMany('SSS/Student');
     }
     public function staffs(){
-        return $this->hasMany('app/Staff');
+        return $this->hasMany('SSS/Staff');
     }
     public function security(){
-        return $this->hasMany('app/Security');
+        return $this->hasMany('SSS/Security');
     }
 }

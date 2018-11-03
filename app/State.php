@@ -12,17 +12,19 @@ class State extends Model
         'name',
     ];
     public function country(){
-        return $this->belongsTo('app\Country');
+        return $this->belongsTo('SSS\Country');
     }
 
     public function administrators(){
-        return $this->hasMany('app\Administrator');
+        return $this->hasMany('SSS\Administrator');
     }
     public function students(){
-        return $this->hasMany('app\Student');
+        return $this->hasMany('SSS\Student');
     }
     public function staffs(){
-        return $this->hasMany('app\Staff');
+        return $this->hasMany('SSS\Staff');
     }
-   
+   public function lgas(){
+       return $this->hasMany('SSS\Lga');
+   }
 }

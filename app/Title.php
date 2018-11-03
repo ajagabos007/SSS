@@ -12,16 +12,16 @@ class Title extends Model
     ];
    
     public function administrators(){
-        return $this->hasMany('app\Administrator');
+        return $this->hasMany('SSS\Administrator');
     }
     
     public function staffs(){
-        return $this->hasMany('app\Staff');
+        return $this->hasMany('SSS\Staff');
     }
     public function next_of_kins(){
-        return $this->hasMany('app\Next_of_kin');
+        return $this->hasMany('SSS\Next_of_kin');
     }
     public function guidances(){
-        return $this->hasMany('app\Guidance');
+        return $this->hasMany('SSS\Guidance');
     }
 }

@@ -4,6 +4,7 @@ namespace SSS\Http\Controllers\Auth;
 
 use SSS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -34,6 +35,21 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','studentLogout');
     }
+
+    public function studentLogout(Request $request){
+
+        $this->guard()->logout();
+        /*
+        The code with label CODE below destroys all session but we
+        dont want that cause we want to remain login 
+        as other users e.g admin,guardian, security etc until logout
+
+        CODE: $request->session()->invalidate();
+        */
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    
 }

@@ -26,10 +26,25 @@ class RedirectIfAuthenticated
                     # code...
                     return redirect()->route('admin');
                     break;
+
+                case 'staff':
+                    # code...
+                    return redirect()->route('staff');
+                    break;
                 
+                case 'guardian':
+                    # code...
+                    return redirect()->route('guardian');
+                    break;
+
+                case 'security':
+                    # code...
+                    return redirect()->route('security');
+                    break;
+
                 default:
                     # code...
-                    return redirect()-route('/home');
+                    return redirect()->route('home');
                     break;
             }
             //end here

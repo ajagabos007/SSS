@@ -1,5 +1,5 @@
 @extends('layouts.sss')
-@include('layouts.sideBar')
+@include('layouts.topBar.guardian')
 @section('content')
 <div class="panel panel-primary">
     <div class="panel panel-heading">
@@ -7,6 +7,7 @@
     </div>
      <div class="panel panel-body">
         <form class="form-horizontal" method="POST"  action="{{route('guardian/update')}}" role="form">
+        @csrf
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Name:</label>
                 <div class="col-sm-10">

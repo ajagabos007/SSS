@@ -1,9 +1,9 @@
 @extends('layouts.sss')
-@include('layouts.sideBar')
+ @include('layouts.topBar.guardian')
 @section('content')
 <div class="panel panel-primary">
     <div class="panel panel-heading">
-        {{__('Guardian Profile')}}
+        {{__('Guardian Profile')}} 
     </div>
      <div class="panel panel-body">
         <form class="form-horizontal" role="form">

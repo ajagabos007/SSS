@@ -2,7 +2,7 @@
 
 namespace SSS\Http\Controllers;
 
-use SSS\Staff;
+use SSS\Staffs;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -15,12 +15,21 @@ class StaffsController extends Controller
      */
     public function __construct(){
 
-         $this->middleware('auth:staff');
+        //   $this->middleware('auth:staff')->except('auth:administrator');
     }
     public function index()
     {
         //
-       $staffs = Staff::all();
+       $staffs = Staffs::all();
+       
+       //check the if admin is making the request
+       if(session()->has('login_administrator_59ba36addc2b2f9401580f014c7f58ea4e30989d')){
+
+           $staffs = Auth::user()->staff;
+            return view('administrators.staffs.index',['staffs'=>$staffs]);
+       };
+
+      return Auth::user();
        return view('staffs.index',['staffs'=>$staffs]);
     }
 
@@ -32,6 +41,7 @@ class StaffsController extends Controller
     public function create()
     {
         //
+        return view('staffs.create');
     }
 
     /**
@@ -43,6 +53,9 @@ class StaffsController extends Controller
     public function store(Request $request)
     {
         //
+        $defaultPassword = Hash::make('SSSstaff');
+        return $defaultPassword;
+        return $request;
     }
 
     /**

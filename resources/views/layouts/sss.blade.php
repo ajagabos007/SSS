@@ -12,19 +12,194 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" ></script>
+    <!-- <script src="{{ asset('js/sss.js')}}"></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap from cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">     
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>  -->
 
+    <!-- Bootstrap from local  -->
+    <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+
+    <script>
+        jQuery(document).ready(function(){
+            jQuery('#country_id').change(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{('/getStates')}}",
+                    method: 'get',
+                    data:{
+                        country_id : jQuery("#country_id").val()
+                    },
+                    success: function(result){
+                        states = jQuery("#state_id");
+                        lgas = jQuery('#lga_id');
+                        if(result!=""){
+                            states.removeAttr('disabled');
+                            states.children("").remove();
+                            states.append('<option> </option>');
+                            for(state in result){
+                                states.append("<option value='"+result[state].id+"'>"+result[state].name + "</option>")
+                            }
+                            lgas.children("").remove();
+                            lgas.attr({
+                                disabled: 'disabled',
+                                style:'border:red yellow 1px',
+                            })
+                        }
+                        else{
+                            states.attr('disabled','disabled');
+                            states.children("").remove();
+                            states.append('<option> </option>');
+                            lgas.children("").remove();
+                            lgas.attr({
+                                disabled: 'disabled',
+                                style:'border:red yellow 1px',
+                            })
+                        }
+                            
+                    },
+                    error: function(){
+                        alert("an error occured");
+                    }
+                    
+                });
+            });
+            jQuery('#state_id').change(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{('/getLgas')}}",
+                    method: 'get',
+                    data:{
+                        state_id : jQuery("#state_id").val()
+                    },
+                    success: function(result){
+                        lgas = jQuery("#lga_id");
+                        if(result!=""){
+                            lgas.children("").remove();
+                            lgas.removeAttr('disabled');
+                            lgas.append('<option> </option>');
+                            for(lga in result){
+                                lgas.append("<option value='"+result[lga].id+"'>"+result[lga].name + "</option>")
+                             }
+                        }
+                        else{
+                            lgas.children("").remove();
+                            lgas.attr('disabled','disabled');
+                            lgas.append('<option> </option>');
+                        }
+                        
+                    },
+                    error: function(){
+                        alert("Error retrieving the LGA(s)");
+                    }
+                    
+                });
+		    });
+            jQuery('#school_id').change(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{('/getClasses')}}",
+                    method: 'get',
+                    data:{
+                        school_id : jQuery("#school_id").val()
+                    },
+                    success: function(result){
+                        classes = jQuery("#class_id");
+                        if(result!=""){
+                            classes.removeAttr('disabled');
+                            classes.children("").remove();
+                            classes.append('<option> </option>');
+                            for(classe in result){
+                                classes.append("<option value='"+result[classe].id+"'>"+result[classe].name + "</option>")
+                            };
+                        }
+                        else{
+                            classes.attr('disabled','disabled');
+                            classes.children("").remove();
+                            classes.append('<option> </option>');
+                        }
+                    },
+                    error: function(){
+                        alert("Error retreving Level/Class...!!!");
+                    }
+                    
+                });
+            });
+        });
+    </script>
+    <style> 
+           *{
+            font-family:georgia,garamond,serif;
+
+           } 
+           body{
+               /* background-image:url("{{asset('images/james.jpg')}}") */
+           }
+           #app{
+             margin:30px 0px 0px 0px !important;
+             padding:0px !important;
+             /* background-color:lightblue; */
+
+         }
+
+        .topnav {
+            /* background-image:url("{{asset('images/james.jpg')}}") ; */
+         }
+         
+         .navbar-default a{
+             font-weight:500;
+             font-size:120%;
+             margin:0px;
+         }
+         main{
+             padding-top:55px;
+             /* padding-top:100px; */
+         }
+         .login-form{
+             margin:40px 60px;
+         }
+         a:hover{
+             background-color:deepSkyBlue !important;
+
+         }
+         footer{
+             padding:10px;
+             background-color:#f8f8f8;
+         }
+         .sidenav{
+             margin:0px 0px 0px 0px; #TRLB
+         }
+        
+
+    </style>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default">
+        <nav class="nav navbar-default navbar-fixed-top topnav" >
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,68 +207,40 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                     <img src="#"/>
-                      <a class="navbar-brand" href="{{url('/home')}}">{{ config('app.name', 'SSS') }}</a>
+                    <a class="navbar-brand" href="{{url('/home')}}"> 
+                        <img  src="{{asset('images/sss9.jpg')}}" alt="SSS Logo" class="img img-circle" height="25" width="100" >
+                    </a>
                 </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav nav-tabs">
-                        @auth('web')
-                         <li><a href="">{{__('Home')}}</a></li>
-                        @endauth('web')
-                        @auth('administrator')
-                            <li><a href="#">{{__('Home')}}</a></li>
-                        @endauth('administrator')
-                        @auth('staff')
-                            <li><a href="#">{{__('Home')}}</a></li>
-                        @endauth('staff')
-                        @auth('guardian')
-                        <li><a href="{{route('guardian')}}">{{__('Home')}}</a></li>
-                        @endauth('guardian')
-                        @auth('security')
-                            <li><a href="#">{{__('Home')}}</a></li>
-                        @endauth('security')
-                        <li><a href="#">About SSS</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Our policy</a></li>
+                <div class="collapse navbar-collapse"  id="myNavbar">
+                    <ul class="nav navbar-nav nav-tabs" >
+                    @yield('homelink')
+                        <li><a href="#" class="active">About</a></li>
+                        <li><a href="#" >Contact    </a></li>
+                        <li><a href="#">Policy</a></li>
                     </ul>
                    <ul class="nav navbar-nav navbar-right">
                         
                         <!-- Authentication Links -->
                         @guest
-                                <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-user"></span>{{__('Login')}}</a></li>
-                                <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-log-in"></span>{{__('Register')}}</a></li>
+                                <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> {{__('Login')}}</a></li>
+                                <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-pencil"></span> {{__('Register')}}</a></li>
                             @else
                                 <li class="dropdown">
                                     <a class= "dropdown-toggle btn" type="button" data-toggle="dropdown">
-                                        {{ Auth::user()->name }}<span class="caret"></span>
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                    @yield('username')
+
+                                        <!--This is show be designed in layouts topBar staff  -->
+                                        @auth('staff')
+                                            {{('(staff)')}}
+                                        @endauth('staff')
+                                      <!-- ends here -->
+                                    <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        @auth('web')
-                                            <li><a href="">{{__('Profile')}}</a></li>
-                                        @endauth('web')
-                                        @auth('administrator')
-                                            <li><a href="#">{{__('Profile')}}</a></li>
-                                        @endauth('administrator')
-                                        @auth('staff')
-                                            <li><a href="#">{{__('Profile')}}</a></li>
-                                        @endauth('staff')
-                                        @auth('guardian')
-                                            <li><a href="{{route('guardian/profile',Auth::user()->id)}}">{{__('Profile')}}</a></li>
-                                        @endauth('guardian')
-                                        @auth('security')
-                                            <li><a href="#">{{__('Profile')}}</a></li>
-                                        @endauth('security')
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                                
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                        </form>
-                                        </li>
+                                        
+                                        @yield('topBar_dropdown')
+                                        
                                     </ul>
                                 </li>
                         @endguest
@@ -101,28 +248,28 @@
                 </div>
             </div>
         </nav>
-
-        <div class="container-fluid text-center">    
-            <div class="row content">
-                <div class="col-sm-2 sidenav">
-                  @yield('left_sidenav')
-                </div>
-                <div class="col-sm-8 text-left main"> 
-                  <div class="col-sm-offset-2">
-                    @include('partials.errors')
-                    @include('partials.success')
+       <main>
+            <div class="container-fluid text-center">    
+                <div class="row content">
+                    <div class="col-sm-2 sidenav left">
+                    @yield('left_sidenav')
                     </div>
-                    @yield('content')
-                </div>
-                <div class="col-sm-2 sidenav">
-                    @yield('right_sidenav')
+                    <div class="col-sm-8 text-left main"> 
+                    <div class="">
+                        @include('partials.errors')
+                        @include('partials.success')
+                        </div>
+                        @yield('content')
+                    </div>
+                    <div class="col-sm-2 sidenav">
+                        @yield('right_sidenav')
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <footer class="footer container-default text-center">
-            <p><strong>SSS</strong> &copy; 2018</p>
-        </footer>
-    </div>
-</body>
+        </main>
+    </div>        
+    <footer class="footer container-primary text-center">
+                <p><strong>SSS</strong> &copy; 2018</p> 
+     </footer>
+    </body>
 </html>

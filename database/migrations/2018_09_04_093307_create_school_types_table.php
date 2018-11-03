@@ -7,9 +7,9 @@ use Illuminate\Database\Migrations\Migration;
 class CreateSchoolTypesTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      *
-     * @return void
+     * @return 
      */
     public function up()
     {

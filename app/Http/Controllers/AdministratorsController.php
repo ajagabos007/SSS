@@ -53,6 +53,8 @@ class AdministratorsController extends Controller
     public function show(Administrator $administrator)
     {
         //
+        $administrator = Administrator::find($administrator->id);
+        return view('administrators.show',['administrator'=>$administrator]);
     }
 
     /**
@@ -64,6 +66,8 @@ class AdministratorsController extends Controller
     public function edit(Administrator $administrator)
     {
         //
+        $administrator = Administrator::find($administrator->id);
+        return view('administrators.edit',['administrator'=>$administrator]);
     }
 
     /**
@@ -76,6 +80,8 @@ class AdministratorsController extends Controller
     public function update(Request $request, Administrator $administrator)
     {
         //
+        return ($administrator);
+        return redirect()->route('admin')->with('success','Profile update successfully');
     }
 
     /**
@@ -87,5 +93,11 @@ class AdministratorsController extends Controller
     public function destroy(Administrator $administrator)
     {
         //
+    }
+    public function dashboard(){
+        return view('administrators.dashboard');
+    }
+    public function manage(){
+        return view('administrators.manage');
     }
 }

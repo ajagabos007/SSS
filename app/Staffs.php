@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Staff extends Authenticatable
+class Staffs extends Authenticatable
 {
     //
 
@@ -46,27 +46,27 @@ class Staff extends Authenticatable
         'remember_token',
     ];
     public function pta_role(){
-        return $this->belongsTo('app\Pta_role');
+        return $this->belongsTo(' SSS\Pta_role');
     }
     public function schools(){
-        return $this->belongsTo('app\School');
+        return $this->belongsTo('SSS\School');
     }
     public function genders(){
-        return $this->belongsTo('app\Gender');
+        return $this->belongsTo('SSS\Gender');
     }
     public function classes(){
-        return $this->belongsTo('app\Classe');
+        return $this->belongsTo('SSS\Classe');
     }
     public function countries(){
-        return $this->belongsTo('app\Country');
+        return $this->belongsTo('SSS\Country');
     }
     public function states(){
-        return $this->belongsTo('app\State');
+        return $this->belongsTo('SSS\State');
     }
     public function lgas(){
-        return $this->belongsTo('app\Lga');
+        return $this->belongsTo('SSS\Lga');
     }
     public function religions(){
-        return $this->belongsTo('app\Religion');
+        return $this->belongsTo('SSS\Religion');
     }
 }

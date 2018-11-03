@@ -10,4 +10,5 @@ class Staff_type extends Model
     protected $fillable = [
         'name',
     ];
+    
 }
